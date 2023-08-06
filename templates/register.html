@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+
+{% if error %}
+  <div class="alert alert-danger Alert" role="alert" style="transition: 0.3s ease-in-out; text-align: center; width: 18%; position: absolute; top: 18%; left: 5%;">
+      {{ error }}
+  </div>
+{% endif %}
+
+<h2 style="text-align: center; color: #002D62; margin-top: 3%; padding-top: 5%;">Register</h2>
+<form action="/register" method="post" id="register_form">
+    <!-- Email input -->
+    <div class="form-outline mb-4">
+      <input type="email" id="form2Example1" class="form-control" name="email" autofocus required/>
+      <label class="form-label" for="form2Example1">Email address</label>
+    </div>
+  
+    <!-- Password input -->
+    <div class="form-outline mb-4">
+      <input type="password" id="form2Example2" class="form-control" name="password" autofocus autocomplete="off" required/>
+      <label class="form-label" for="form2Example2">Password</label>
+    </div>
+
+    <!-- confirm password -->
+    <div class="form-outline mb-4">
+        <input type="password" id="form2Example3" class="form-control" name="confirm" autofocus autocomplete="off" required/>
+        <label class="form-label" for="form2Example3">confirm Password</label>
+      </div>
+
+    <div class="text-center">
+        <p>Already a member? <a href="/login" style="color: rgb(6, 91, 23);">Login</a></p>
+    </div>
+  
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary btn-block mb-4" style="background-color: rgb(69, 141, 82); border-color: rgb(69, 141, 82);">Sign in</button>
+</form>
+{% endblock %}

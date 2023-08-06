@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Error!
+{% endblock %}
+
+{% block styles %}
+    <style>
+        h3{
+            margin-top: 2%;
+            text-align: center;
+            color: rgb(255, 97, 97);
+        }
+        img{
+            width: 40vw;
+            height: auto;
+        }
+    </style>
+{% endblock %}
+
+{% block main %}
+    <h3>{{ error }}</h3>
+    <div style="display: flex; justify-content: center; align-items: center; margin: 2%; font-size: 150%;">
+        <a href='{{ link }}'>{{ link_name }}</a>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <img src="https://images.unsplash.com/photo-1584824486516-0555a07fc511?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Error image">
+    </div>
+{% endblock %}
