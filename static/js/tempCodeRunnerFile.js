@@ -1,0 +1,1 @@
+navbar.classList.add('navbar-login');
