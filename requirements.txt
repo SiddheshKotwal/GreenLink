@@ -3,3 +3,4 @@ werkzeug
 flask
 flask_session
 pandas
+gunicorn
