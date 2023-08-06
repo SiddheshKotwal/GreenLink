@@ -3,4 +3,3 @@ werkzeug
 flask
 flask_session
 pandas
-functools
