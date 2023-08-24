@@ -1,5 +1,4 @@
 cs50
-sqlite3
 asyncio
 aiohttp
 werkzeug
