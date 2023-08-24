@@ -1,0 +1,16 @@
+<h1 style="margin-top: 2%; color: rgb(36, 97, 46);"><b>{{no_products}}</b></h1>
+{% for p in products %}
+    <div class="product-template">
+        <img class="product-images" src="{{p['image']}}" alt="products">
+        <div class="product-info">
+            <b class="products-b-1">{{p["company_name"]}}</b>
+            <p class="products-p-1">{{p["product_name"]}}</p>
+            <p>Rating: <b>{{p["rating"]}}</b></p>
+            <div id="products-price">
+                <p>$</p>
+                <h3>{{p["price"]}}</h3>
+            </div>
+            <a class="product-button" href="{{p['link']}}">Buy Now</a>
+        </div>
+    </div>
+{% endfor %}

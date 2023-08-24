@@ -1,0 +1,58 @@
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY UNIQUE NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    hash TEXT NOT NULL);
+
+CREATE TABLE messages(
+    id INTEGER PRIMARY KEY UNIQUE NOT NULL,
+    user_id INTEGER NOT NULL,
+    username TEXT NOT NULL,
+    user_email TEXT NOT NULL,
+    subject TEXT NOT NULL,
+    message TEXT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id));
+
+CREATE TABLE products(
+    id INTEGER UNIQUE PRIMARY KEY NOT NULL,
+    image TEXT NOT NULL,
+    company_name TEXT NOT NULL,
+    product_name TEXT NOT NULL,
+    rating TEXT NOT NULL,
+    price REAL NOT NULL,
+    link TEXT NOT NULL);
+
+CREATE TABLE services(
+    id INTEGER UNIQUE PRIMARY KEY NOT NULL,
+    image TEXT NOT NULL,
+    company_name TEXT NOT NULL,
+    service TEXT NOT NULL,
+    service_desc TEXT NOT NULL,
+    contact_link TEXT NOT NULL,
+    website_link TEXT NOT NULL);
+
+CREATE TABLE energy(
+    id INTEGER UNIQUE PRIMARY KEY NOT NULL,
+    country TEXT NOT NULL,
+    kgCO2_per_kWh REAL NOT NULL,
+    kgCH4_per_kWh REAL NOT NULL,
+    kgN2O_per_kWh REAL NOT NULL);
+
+CREATE TABLE user_details(
+    id INTEGER UNIQUE PRIMARY KEY NOT NULL,
+    user_details_id INTEGER NOT NULL,
+    no_of_people INTEGER,
+    age INTEGER,
+    country TEXT,
+    "energy_consumption(MWh/yr)" REAL,
+    "water_consumption(L/mo)" REAL,
+    "waste_produced(kg/mo)" REAL,
+    "fuel_efficiency(mpg)" REAL,
+    "distance_travelled_on_land(miles/yr)" REAL,
+    "distance_travelled_by_plane(miles/yr)" REAL,
+    fuel_used_for_vehicle TEXT,
+    flight_type TEXT,
+    "food_consumed(kg/mo)" TEXT,
+    "clothes_used(kg/yr)" TEXT,
+    electronics_products TEXT,
+    "greenhouse_gas_emissions(kg/yr)" TEXT,
+    FOREIGN KEY (user_details_id) REFERENCES users(id));

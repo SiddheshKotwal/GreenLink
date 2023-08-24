@@ -1,0 +1,258 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+    GreenLink
+{% endblock %}
+
+{% block video %}
+<div class="video-container">
+    <h3 id="nav_head">GreenLink</h3>
+    <i class="fa fa-bars"></i>
+    <video autoplay loop muted playsinline id="background_video" style="background-color: grey;">
+        <source id="videoSource" src="{{url_for('static', filename='pexels-roman-odintsov-7046816 (1080p).mp4')}}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div id="text-overlay">
+        <h1 id="heading">Welcome to GreenLink</h1>
+        <span id="typedText"></span>
+      </div>
+</div>
+{% endblock %}
+
+    {% block main %}
+    {% if your_emissions or co2_string or ch4_string or n2o_string %}
+        <div class="alert alert-info carbon" role="alert">
+            {{ your_emissions }} <br> {{ co2_string }} &nbsp;&nbsp; {{ ch4_string }} &nbsp;&nbsp; {{ n2o_string }}
+        </div>
+    {% endif %}
+    <section>
+        <div class="grid-container">
+            <div class="grid-item img_1">
+                <img class="img1" src="https://images.unsplash.com/photo-1521708266372-b3547456cc2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=419&q=80" alt="zreo energy building">
+            </div>
+            <div class="grid-item">
+                <h1 class="big_head">Discover a Sustainable Future with GreenLink</h1>
+                <h3 class="grid_h3">
+                    At <span class="grid_h3_span">GreenLink</span>, we are dedicated to driving positive change and accelerating the transition to a sustainable future.
+                </h3>
+                <h6 class="grid_h6">
+                    Did you know that embracing a net zero carbon approach can reduce greenhouse gas emissions by up to X% annually?
+                </h6>
+                <p class="grid_p">
+                    We empower individuals and businesses to make a significant impact on climate change through our platform, 
+                    offering eco-friendly products, networking opportunities, and valuable resources.
+                </p>
+                <h4 class="grid_h4"><a href="#contact_us" style="text-decoration: none;"><span class="grid_h4_span">Join</span></a> our community today and be part of the solution towards a greener, more sustainable planet</h4>
+                <div class="align-button-center">
+                    <a href="#contact_us" class="call-to-action">Contact Us</a>
+                </div>
+            </div>
+            <div class="grid-item img_2">
+                <img class="img2" src="https://plus.unsplash.com/premium_photo-1668078530208-1b6ff9630757?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80  " alt="net zero">
+            </div>
+        </div>
+
+        <div class="carousel-container">
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <a href="/carbonFootprint">
+                    <div class="carousel-item active">
+                        <div class="image-container">
+                            <img src="https://images.unsplash.com/photo-1585259737156-ee9f0d480c81?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" class="d-block w-100" alt="Connecting for the Net zero">
+                        </div>
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Calculate Your Carbon Footprint</h5>
+                        <p>Explore your Carbon Footprint Calculator to estimate your ecological impact. Input energy, transport, and diet details for personalized emission insights. Understand and reduce your carbon footprint now!</p>
+                    </div>
+                    </div>
+                </a>
+                <a href="/products">
+                    <div class="carousel-item">
+                        <div class="image-container">
+                            <img src="https://media.indebuurt.nl/rotterdam/2021/04/20145312/wellness-primark-scaled.jpg" class="d-block w-100" alt="Sustainable Products">
+                        </div>
+                    <div class="carousel-caption d-md-block d-none">
+                        <h5>Sustainable Products</h5>
+                        <p>Shop with purpose and join the zero-carbon revolution on our comprehensive platform, connecting you to a wide array of carbon-neutral products and services that make a positive impact on our planet</p>
+                    </div>
+                    </div>
+                </a>
+                <a href="/services">
+                    <div class="carousel-item">
+                        <div class="image-container">
+                            <img src="https://images.unsplash.com/photo-1535689077097-a8726b5ff822?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" class="d-block w-100" alt="Sustainable services">
+                        </div>
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Sustainable Services</h5>
+                        <p>Discover a world of sustainable services that empower positive change and drive the transition towards a carbon-neutral future, all within our innovative platform connecting organizations, creators, and contractors dedicated to building a sustainable and environmentally friendly world</p>
+                    </div>
+                    </div>
+                </a>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="homepage_services">
+            <h1>Best Seller Products</h1>
+            <div class="inner-container">
+                <div class="main-container">
+                    <img class="services-images" src="https://rukminim1.flixcart.com/image/850/1000/xif0q/shoe/1/0/i/-original-imagg7eszg2hbypn.jpeg?q=90" alt="Sneakers">
+                    <h4 class="services-h3">Neemans</h4>
+                    <h4 class="services-h4">Sneakers</h4>
+                    <p class="services-p">$ 20.05</p>
+                    <a class="services-a" href="https://p-yo-www-amazon-in-kalias.amazon.in/Neemans-Classic-Sneakers-Comfortable-Sustainable/dp/B0B7C6LHN4">Buy Now</a>
+                </div>  
+                <div class="main-container">
+                    <img class="services-images" src="https://cdn.clothbase.com/uploads/24027a3d-5871-4794-ba90-ed3a88634d5d/image.jpg" alt="Eyeglasses">
+                    <h4 class="services-h3">Dick-Moby</h4>
+                    <h4 class="services-h4">Sunglasses</h4>
+                    <p class="services-p">$ 220</p>
+                    <a class="services-a" href="https://clothbase.com/items/600f7f9f_dick-moby-marseille-square-frame-acetate-sunglasses-green_dick-moby">Buy Now</a>
+                </div>
+                <div class="main-container">
+                    <img class="services-images" src="https://cdn.shopify.com/s/files/1/1626/5391/products/Pangaia-365-Signature-Black-Hoodie-Crepslocker_970x.jpg?v=1657358368" alt="Hoodie">
+                    <h4 class="services-h3">Pangaia</h4>
+                    <h4 class="services-h4">365 Heavyweight Hoodie</h4>
+                    <p class="services-p">$ 195</p>
+                    <a class="services-a" href="https://pangaia.com/products/365-signature-hoodie-black">Buy Now</a>
+                </div>
+            </div>  
+            <a class="more-products-button" href="/products">More Products...</a>
+        </div>
+        <hr style="height: 2px; background-color: rgb(61, 61, 61); margin: 0;">
+        <div class="hp-services">
+            <h1>Top Services</h1>
+            <div class="service-container">
+                <img class="hp-images" src="https://www.cnet.com/a/img/resize/7b52bfc761be092a0535dc3f6ca8608ba9c9d187/hub/2021/11/15/06bb6b10-bb38-451f-a4c2-49bff6911188/0x0-solarpanels-04.jpg?auto=webp&width=1200" alt="Solar Panels">
+                <div class="services-info">
+                    <h4 class="service-info-h4">Tesla Solar Panels Installation</h4>
+                    <p class="ellipsis">Use solar energy to power your home and reduce your dependence on the grid. Purchase solar at the lowest price of any national provider with Tesla's price match guarantee and take control of your monthly electricity bill. Schedule a virtual consultation with a Tesla Advisor to learn more.</p>
+                    <div class="hp-buttons">
+                        <a style="padding: 1%;" class="service-new" href="https://www.tesla.com/solar-virtual-consultations">Virtual Consultation</a>
+                        <a class="service-new services-extra visit" href="https://www.tesla.com/energy/design">Buy Solar Panels</a>    
+                    </div>
+                </div>
+            </div>
+            <div class="service-container">
+                <img class="hp-images" src="https://www.clearesult.com/sites/default/files/styles/atlas_image/public/2022-12/IMG-BIZ-WWS_0.png?itok=hEL_qiiO" alt="Energy Auditing">
+                <div class="services-info">
+                    <h4 class="service-info-h4">Energy Audit and Efficiency Consulting</h4>
+                    <p class="ellipsis">Businesses that take sustainability seriously outperform than their competitors in terms of stock price, peer perception and overall management. Let us bring those same benefits to your organization. Our team has a comprehensive energy playbook for multi-site enterprises as well as single location businesses. What’s more, we have experience working with multifamily real estate developers, Fortune 500 enterprises and everyone in between. Now’s the time to tap our expertise.</p>
+                    <div class="hp-buttons">
+                        <a style="padding: 1%;" class="service-new" href="https://www.clearesult.com/contact">Book a Consultation</a>
+                        <a class="service-new services-extra visit" href="https://www.clearesult.com/who-we-serve#business">Visit CLEAResult.com</a>    
+                    </div>
+                </div>
+            </div>
+            <div class="service-container">
+                <img class="hp-images" src="https://councilmagazine.com.au/wp-content/uploads/2019/02/shutterstock_446979544-e1549346043383-1038x612.jpg" alt="Zero Energy Building">
+                <div class="services-info">
+                    <h4 class="service-info-h4">Zero Energy Home Professional</h4>
+                    <p class="ellipsis">Looking for zero-energy home professionals? Find experienced builders, designers, and energy consultants in this directory. Verify their certification and discover modular home and panelized home manufacturers offering products used in zero-energy homes. Start your search for the right construction professional for your project.</p>
+                    <div class="hp-buttons">
+                        <a style="padding: 1%;" class="service-new" href="https://zeroenergyproject.com/zero-energy-home-directory/">Book a Professional</a>
+                        <a class="service-new services-extra visit" href="https://zeroenergyproject.com/">Visit zeroenergyproject.com</a>    
+                    </div>
+                </div>
+            </div>
+            <a class="more-services-button" href="/services">More Services...</a>
+        </div>
+    </section>
+
+    <section>
+        <div class="UN-goals">
+            <h1 class="c-h1"><b>GreenLink's</b> Impact on United Nations <b>Sustainable Development Goals</b></h1>
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+                <div class="carousel-inner c-inner">
+                    <div class="carousel-item active c-item">
+                    <img class="c-img" src="{{url_for('static', filename='goal 7.jpg')}}" alt="Goal 7">
+                    </div>
+                    <div class="carousel-item c-item">
+                    <img class="c-img" src="{{url_for('static', filename='goal 12.jpg')}}" alt="Goal 12">
+                    </div>
+                    <div class="carousel-item c-item">
+                    <img class="c-img" src="{{url_for('static', filename='goal 13.jpg')}}" alt="Goal 13">
+                    </div>
+                </div>
+            </div>
+            <a class="special-button" href="#contact_us">Join us to contribute</a>
+        </div>
+    </section>
+
+    <section id="about_us">
+        <div class="about_heading">
+            <div class="about_heading-1">
+                <h1><b>About Us </b></h1>
+                <p>Welcome to GreenLink, a dynamic platform dedicated to fostering a sustainable and environmentally friendly future. Our vision is to connect individuals, organizations, and businesses with carbon-neutral products and services on a centralized hub</p>
+            </div>
+            <div class="about_heading-2">
+                <h2><b>Our Vision for a Sustainable Future</b></h2>
+                <h4>Empowering Sustainable Choices and Positive Impact</h4>
+                <p>At GreenLink, we are committed to creating a positive impact by promoting sustainability and eco-friendliness. Our platform serves as a catalyst for change, facilitating connections between sellers and buyers who are passionate about contributing to a carbon-neutral world.</p>
+            </div>
+        </div>
+        <div class="about-img">
+            <img class="about-img-1 a-1" src="https://images.unsplash.com/photo-1581081874314-cf94ae666228?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80" alt="sustainability">
+            <img class="about-img-1 a-2" src="https://images.pexels.com/photos/9875441/pexels-photo-9875441.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="solar panels">
+            <img class="about-img-1 a-3" src="https://plus.unsplash.com/premium_photo-1661760002798-b8e43778ea2e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="collaboration">
+        </div>
+        <div class="about_heading-unique">
+            <p id="about-p-1">Our mission is to accelerate the transition towards a <b class="about-p-1-b">carbon-neutral future</b>. By bringing together individuals and organizations, we aim to inspire collaborative efforts and create a sustainable ecosystem.</p>
+            <p id="about-p-2"><b class="about-p-2-b"><a class="anchor_tags" href="#contact_us">Join us</a></b> on this journey towards a greener and more sustainable future. Together, we can make a difference.</p>
+        </div>
+    </section>
+
+    <section id="contact_us">
+        {% if error %}
+            <div class="alert alert-info Alert" role="alert" id="message-Alert">
+                {{ error }}
+            </div>
+        {% endif %}
+        <h1 id="contact-us-h1"><b>Contact Us</b></h1>
+        <div class="contact_container">
+            <form class="form-container" autocomplete="on" action="/" method="post">
+                <div class="form-row">
+                  <input style="width: 55%;" type="text" placeholder="Your Name" name="Name" class="form-control d-block mb-4 me-3" required>
+                  <input type="email" placeholder="Your Email" name="Email" class="form-control w-100 d-block mb-4" required>
+                </div>
+                <input type="text" placeholder="Subject" name="Subject" class="form-control w-100 d-block mb-4" required>
+                <textarea type="text" placeholder="Message" rows="5" name="Message" class="form-control w-100 d-block mb-4" required></textarea>
+                <button type="submit" class="btn btn-primary btn-block mb-4" style="background-color: rgb(50, 116, 62); border-color: rgb(50, 116, 62);">Send Message</button>
+            </form>
+            <div class="about-us-info">
+                <h2 style="font-weight: bold;">Want to collaborate?</h2>
+                <p>Reach out to us with any questions, feedback, or partnership inquiries - we'd love to hear from you and support your journey towards a more sustainable future</p>
+                <h5 id="contact-email-head">Email: <a class="anchor_tags" href="mailto: greenlink***@gmail.com"> &nbsp; greenlink@gmail.com</a></h5>
+                <div class="contact-logos">
+                    <ul>
+                        <li>
+                            <a href="https://instagram.com"> <i class="fa fa-instagram"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com"> <i class="fa fa-linkedin"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://facebook.com"> <i class="fa fa-facebook"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+        {% endblock %}

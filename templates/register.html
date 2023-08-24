@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+
+    <div id="register">
+        {% if error %}
+          <div class="alert alert-danger Alert register-alert" role="alert">
+              {{ error }}
+          </div>
+        {% endif %}
+
+        <h2 class="register-h2">Register</h2>
+        <form action="/register" method="post" id="register_form">
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+              <input type="email" id="form2Example1" class="form-control" placeholder="Email" name="email" autofocus required/>
+              <label class="form-label" for="form2Example1">Email address</label>
+            </div>
+          
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+              <input type="password" id="form2Example2" class="form-control" placeholder="Password" name="password" autofocus autocomplete="off" required/>
+              <label class="form-label" for="form2Example2">Password</label>
+            </div>
+
+            <!-- confirm password -->
+            <div class="form-outline mb-4">
+                <input type="password" id="form2Example3" class="form-control" name="confirm" placeholder="Confirm Password" autofocus autocomplete="off" required/>
+                <label class="form-label" for="form2Example3">confirm Password</label>
+              </div>
+
+            <div class="text-center">
+                <p>Already a member? <a href="/login" style="color: white;">Login</a></p>
+            </div>
+          
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block mb-4" style="background-color: white; color: rgb(6, 91, 23); font-weight: bold; border-color: white;">Sign in</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block main %}
+    <div id="login">
+        {% if error %}
+        <div class="alert alert-danger Alert login-alert" role="alert">
+            {{ error }}
+        </div>
+        {% endif %}
+        <h2 id="login-h2">Login</h2>
+        <form action="/login" method="post" style="margin-bottom: 5%;">
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+              <input type="email" id="form2Example1" class="form-control" placeholder="Email" name="email" autofocus required/>
+              <label class="form-label" for="form2Example1">Email address</label>
+            </div>
+          
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+              <input type="password" id="form2Example2" class="form-control" placeholder="Password" name="password" autofocus required/>
+              <label class="form-label" for="form2Example2">Password</label>
+            </div>
+          
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-bloc mb-4" style="background-color: white; color: rgb(6, 91, 23); font-weight: bold; border-color: white;">log in</button>
+          
+            <!-- Register buttons -->
+            <div class="text-center">
+              <p>Not a member? <a href="/register" style="color: white;">Register</a></p>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

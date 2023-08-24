@@ -1,0 +1,9 @@
+cs50
+sqlite3
+asyncio
+aiohttp
+werkzeug
+flask
+flask_session
+pandas
+gunicorn

@@ -1,0 +1,288 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    GreenLink
+{% endblock %}
+
+{% block main %}
+    <section id="carbonFootprint">
+        {% if error %}
+        <div class="alert alert-danger Alert" role="alert" id="carbon-Alert">
+            {{ error }}
+        </div>
+        {% endif %}
+        <h1 class="mb-5" style="text-align: center; font-weight: bold; color: white;">
+            Calculate Your Carbon Footprint
+        </h1>
+        <div id="carbon-container">
+            <form id="carbon-calculator" action="/carbonFootprint" method="post">
+                <div class="king-container">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs" id="myTab">
+                            <li class="nav-item">
+                                <a href="#house" class="nav-link active" data-bs-toggle="tab" data-bs-target="#house">House</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#transport" class="nav-link" data-bs-toggle="tab" data-bs-target="#transport">Transport</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#air-transport" class="nav-link" data-bs-toggle="tab" data-bs-target="#air-transport">Air Transport</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#other" class="nav-link" data-bs-toggle="tab" data-bs-target="#other">Other</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <hr style="height: 2px; background-color: white; opacity: 1;" class="mb-4 mt-3">
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="house">
+                                <h4>House</h4>
+                                <div class="carbon-row">
+                                    <div class="form-outline mb-4 mt-4">
+                                        <input type="text" id="people" class="form-control" name="people" autofocus/>
+                                        <label class="form-label w-75" for="people">No. of people at Home</label>
+                                    </div>
+                                    <div class="form-outline mb-4 mt-4 ms-lg-3 position-relative">
+                                        <input type="text" id="age" placeholder="years" class="form-control" name="age" autofocus />
+                                        <label class="form-label age-years ps-4" for="age">Your Age</label>
+                                    </div>
+                                </div>
+                                <div class="carbon-row">
+                                    <div class="form-outline mb-3">
+                                        <input type="text" id="country" class="form-control" name="country" autofocus />
+                                        <label class="form-label" for="country">Country</label>
+                                    </div>
+                                    <div style="padding-left: 10%;" class="form-outline mb-3 energy-input w-75">
+                                        <input style="width: 60%;" placeholder="MWh/yr" type="text" id="energy" class="form-control" name="energy" autofocus />
+                                        <label class="form-label" for="energy">Energy Consumption per year</label>
+                                    </div>
+                                </div>
+                                <div class="carbon-row">
+                                    <div style="position: relative;" class="form-outline mb-3 w-50">
+                                        <input type="text" class="form-control w-50" placeholder="L/mo" id="water" name="water" autofocus />
+                                        <label class="form-label water-consumed" for="water">Water consumption</label>
+                                    </div>
+                                    <div style="position: relative;" class="form-outline mb-3 w-50">
+                                        <input type="text" class="form-control w-50" id="waste" placeholder="kg/mo" name="waste" autofocus />
+                                        <label class="form-label waste" for="waste">Waste Generation</label>
+                                    </div>
+                                </div>
+                                <hr style="height: 2px; background-color: white; opacity: 1;" class="mb-4 mt-3">
+                                <div class="init-result mb-2 mt-3">
+                                    <span><span>CO<sub>2</sub>: </span><span class="co2"></span><span style="font-weight: 400;"> kg/year</span></span>
+                                    <span><span>CH<sub>4</sub>: </span><span class="ch4"></span><span style="font-weight: 400;"> kg/year</span></span>
+                                    <span><span>N<sub>2</sub>O: </span><span class="n2o"></span><span style="font-weight: 400;"> kg/year</span></span>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="transport">
+                                <h4 class="mb-4">Transportation</h4>
+                                <h5 style="font-weight: 400;" class="mb-3">Choose Fuel Type:</h5>
+                                <div class="d-flex gap-5 mb-4">
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" name="gasoline" id="gasoline">
+                                        <label class="custom-control-label" for="gasoline">
+                                            Gasoline/Petrol
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" name="diesel" id="diesel">
+                                        <label class="custom-control-label" for="diesel">
+                                            Diesel
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="carbon-row">
+                                    <div style="position: relative;" class="form-outline mb-3">
+                                        <input type="text" class="form-control w-50" placeholder="mpg" id="fuel-mpg" name="fuel-mpg" autofocus />
+                                        <label class="form-label fuel-efficiency" for="fuel-mpg">Fuel Efficiency</label>
+                                    </div>
+                                    <div style="padding-left: 10%; position: relative;" class="form-outline mb-3 w-75">
+                                        <input type="text" class="form-control w-75" placeholder="miles/yr" id="travel" name="travel" autofocus />
+                                        <label class="form-label distance-travelled" for="travel">Distance Travelled</label>
+                                    </div>
+                                </div>
+                                <hr style="height: 2px; background-color: white; opacity: 1;" class="mb-4 mt-3">
+                                <div class="init-result mb-2 mt-3">
+                                    <span><span>CO<sub>2</sub>: </span><span class="co2"></span><span style="font-weight: 400;"> kg/year</span></span>
+                                    <span><span>CH<sub>4</sub>: </span><span class="ch4"></span><span style="font-weight: 400;"> kg/year</span></span>
+                                    <span><span>N<sub>2</sub>O: </span><span class="n2o"></span><span style="font-weight: 400;"> kg/year</span></span>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="air-transport">
+                                <h4 class="mb-4">Air Transport</h4>
+                                <h5 style="font-weight: 400;" class="mb-3">Choose Flight Type:</h5>
+                                <div class="d-flex gap-5 mb-4">
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" name="domestic" id="domestic">
+                                        <label class="custom-control-label" for="domestic">
+                                            Domestic
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" name="international" id="international">
+                                        <label class="custom-control-label" for="international">
+                                            International
+                                        </label>
+                                    </div>
+                                </div>
+                                <div style="position: relative;" class="form-outline mb-4 w-50">
+                                    <input type="text" class="form-control w-75" placeholder="miles/yr" id="air_travel" name="air_travel" autofocus />
+                                    <label class="form-label air-travelled" for="air_travel">Distance Travelled (both ways)</label>
+                                </div>
+                                <hr style="height: 2px; background-color: white; opacity: 1;" class="mb-4 mt-3">
+                                <div class="init-result mb-2 mt-3">
+                                    <span><span>CO<sub>2</sub>: </span><span class="co2"></span><span style="font-weight: 400;"> kg/year</span></span>
+                                    <span><span>CH<sub>4</sub>: </span><span class="ch4"></span><span style="font-weight: 400;"> kg/year</span></span>
+                                    <span><span>N<sub>2</sub>O: </span><span class="n2o"></span><span style="font-weight: 400;"> kg/year</span></span>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="other">
+                                <h5 style="font-weight: 400;" class="mb-3">Food Consumption:</h5>
+                                <div class="food-row">
+                                    <div style="position: relative;" class="form-outline mb-4 w-25">
+                                        <input type="text" class="form-control w-75" placeholder="kg/mo" id="chicken" name="chicken" autofocus />
+                                        <label class="form-label food-consumed" for="chicken">Chicken</label>
+                                    </div>
+                                    <div style="position: relative;" class="form-outline mb-4 w-25">
+                                        <input type="text" class="form-control w-75" placeholder="kg/mo" id="rice" name="rice" autofocus />
+                                        <label class="form-label food-consumed" for="rice">Rice</label>
+                                    </div>
+                                    <div style="position: relative;" class="form-outline mb-4 w-25">
+                                        <input type="text" class="form-control w-75" placeholder="kg/mo" id="beans" name="beans" autofocus />
+                                        <label class="form-label food-consumed" for="beans">Beans</label>
+                                    </div>
+                                </div>
+                                <h5 style="font-weight: 400;" class="mb-3">Electronic Products:</h5>
+                                <div class="d-flex flex-wrap gap-2 column-gap-4 mb-4">
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" name="smartphone" id="smartphone">
+                                        <label class="custom-control-label" for="smartphone">
+                                            Smartphone
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" name="laptop" id="laptop">
+                                        <label class="custom-control-label" for="laptop">
+                                            Laptop/Computer
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" name="television" id="television">
+                                        <label class="custom-control-label" for="television">
+                                            Television
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" name="refrigerator" id="refrigerator">
+                                        <label class="custom-control-label" for="refrigerator">
+                                            Refrigerator
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" name="washing_machine" id="washing_machine">
+                                        <label class="custom-control-label" for="washing_machine">
+                                            Washing Machine
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" name="air_conditioner" id="air_conditioner">
+                                        <label class="custom-control-label" for="air_conditioner">
+                                            Air Conditioner
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" name="game_console" id="game_console">
+                                        <label class="custom-control-label" for="game_console">
+                                            Game Console
+                                        </label>
+                                    </div>
+                                </div>                                
+                                <h5 style="font-weight: 400;" class="mb-3">Quantity of Clothes:</h5>
+                                <div style="position: relative;" class="form-outline mb-3 w-50">
+                                    <input type="text" class="form-control w-50" placeholder="kg/yr" id="clothes" name="clothes" autofocus />
+                                    <label class="form-label clothes-used" for="clothes">Clothes</label>
+                                </div>
+                                <!-- Submit button -->
+                                <button type="submit" class="btn btn-primary btn-block mb-4 carbon-button">Check Total</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="carbon-images">
+                <p> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Explore Your Impact: Estimate your carbon footprint with our tool. Input data on energy, transport, diet, and waste to uncover ways to reduce emissions. Shape a greener future by taking small steps today.</p>
+                <img id="calculator-images" src="https://saveonenergy.ca/-/media/Images/SaveOnEnergy/residential/net-zero-home-disocver-home-2.ashx?h=1000&w=1500&la=en&hash=80056C97F2F57E41F1336E183039E6D3" alt="Net zero House">
+                <p>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;Calculate Your Impact: Input lifestyle details to estimate CO2, CH4, and N2O emissions. Gain insights into areas for reducing your footprint and embark on a greener journey. Use our Carbon Footprint Calculator now.</p>
+            </div>
+        </div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Attach event listener to input fields
+        $('.form-control').on('input', function() {
+            updateEmissions();
+        });
+
+        // Attach event listener to checkbox inputs
+        $('.form-check-input').on('change', function() {
+            updateEmissions();
+        });
+    });
+
+    function updateEmissions() {
+        // Collect input data
+        var formData = {
+            'people': $('#people').val(),
+            'age': $('#age').val(),
+            'country': $('#country').val(),
+            'energy': $('#energy').val(),
+            'water': $('#water').val(),
+            'waste': $('#waste').val(),
+            'fuel-mpg': $('#fuel-mpg').val(),
+            'travel': $('#travel').val(),
+            'air_travel': $('#air_travel').val(),
+            'chicken': $('#chicken').val(),
+            'rice': $('#rice').val(),
+            'beans': $('#beans').val(),
+            'clothes': $('#clothes').val(),
+
+            'gasoline': $('#gasoline').is(':checked'),
+            'diesel': $('#diesel').is(':checked'),
+            'domestic': $('#domestic').is(':checked'),
+            'international': $('#international').is(':checked'),
+            'smartphone': $('#smartphone').is(':checked'),
+            'laptop': $('#laptop').is(':checked'),
+            'television': $('#television').is(':checked'),
+            'refrigerator': $('#refrigerator').is(':checked'),
+            'air_conditioner': $('#air_conditioner').is(':checked'),
+            'washing_machine': $('#washing_machine').is(':checked'),
+            'game_console': $('#game_console').is(':checked')
+            
+        };
+
+        // Send input data to the Flask backend
+        $.ajax({
+            type: 'POST',
+            url: '/calculate_emissions',
+            contentType: 'application/json',
+            data: JSON.stringify(formData),
+            success: function(response) {
+                // Update UI with calculated emissions
+                updateEmissionsResults(response);
+            },
+            error: function(error) {
+                console.log('Error:', error);
+            }
+        });
+    }
+
+    function updateEmissionsResults(emissions) {
+        // Update UI with the calculated emissions
+        $('.co2').text(emissions.CO2.toFixed(2));
+        $('.ch4').text(emissions.CH4.toFixed(2));
+        $('.n2o').text(emissions.N2O.toFixed(2));
+    }
+</script>
+{% endblock %}

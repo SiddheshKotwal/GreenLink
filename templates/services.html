@@ -1,0 +1,136 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    GreenLink
+{% endblock %}
+
+{% block main %}
+    <section id="services">
+        <div class="search-box">
+            <div class="button-flex">
+                <p class="service-page-p">Filter:</p>
+                <button type="button" class="btn btn-primary btn-block" style="margin-left: 1%; margin-right: 1%; background-color: rgb(69, 141, 82); border-color: rgb(69, 141, 82);" onclick="sortServices('company_name')">sort by company</button>
+                <button type="button" class="btn btn-primary btn-block" style="margin-right: 2%; background-color: rgb(69, 141, 82); border-color: rgb(69, 141, 82);" onclick="sortServices('service')">sort by service</button>
+            </div>            
+            <form id="search-form" class="search-form">
+                <input type="text" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px;" name="search" id="search-bar" placeholder="search for services" class="form-control">
+                <button type="button" class="btn btn-primary btn-block" style="border-top-left-radius: 0px; border-bottom-left-radius: 0px; background-color: rgb(69, 141, 82); border-color: rgb(69, 141, 82);" onclick="searchServices()">Search</button>
+            </form>
+        </div>
+        <hr style="height: 2px; background-color: grey;">
+
+        <div class="services-container">             
+            <h1 style="margin-top: 2%; color: rgb(36, 97, 46);"><b></b></h1>
+            {% if services %}
+                {% for s in services %}
+                    <div class="services-template">
+                        <img class="service-images" src="{{s['image']}}" alt="products">
+                        <div class="service-info">
+                            <b class="services-b-1">{{s["company_name"]}}</b>
+                            <p class="services-p-1">{{s["service"]}}</p>
+                            <p class="ellipsis-services">{{s["service_desc"]}}</p>
+                            <div class="serviceButtons">
+                                <a class="service-contact-button" href="{{s['contact_link']}}">Contact Now</a>
+                                <a class="service-button" href="{{s['website_link']}}">Visit Site</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+
+        // Function to handle form submission when the Enter key is pressed
+        function handleFormSubmission(event) {
+            event.preventDefault(); // Prevent the default form submission behavior
+            searchServices(); // Call the searchProducts function for AJAX-based search
+        };
+
+        // Event listener to handle form submission when Enter key is pressed
+        document.getElementById('search-form').addEventListener('submit', handleFormSubmission);
+
+        function searchServices() {
+            // Get the search query from the input field
+            var searchQuery = $('#search-bar').val();
+
+            // Perform an AJAX POST request to send the form data
+            $.ajax({
+                url: '/services',
+                type: 'POST',
+                data: { search: searchQuery },
+                success: function(data) {
+                    // Update the products container with the data received from the server
+                    $('.services-container').html(data);
+
+                    // Save the search results in sessionStorage
+                    sessionStorage.setItem('searchResults', JSON.stringify(data));
+
+                    // Push the current search results into the browsing history
+                    history.pushState({ searchResults: data }, document.title);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+        };
+
+        // Function to check if there are stored search results and display them on page load
+        function displayStoredResults() {
+            var storedResults = sessionStorage.getItem('serviceSearchResults');
+            if (storedResults) {
+                $('.services-container').html(JSON.parse(storedResults));
+            }
+        }
+
+        // Function to handle the back button click
+        window.onpopstate = function(event) {
+            if (event.state && event.state.searchResults) {
+                // If there are previous search results in the browsing history, display them
+                $('.services-container').html(event.state.searchResults);
+            } else {
+                // If no previous search results, load the default products using AJAX
+                displayStoredResults();
+            }
+        };
+
+        // Call the function to display stored results on page load
+        $(document).ready(function() {
+            displayStoredResults();
+        });
+
+        function sortServices(sortBy) {
+            // Perform an AJAX POST request to send the sorting option to the server
+            $.ajax({
+                url: '/sort_services',
+                type: 'POST',
+                data: { sort_by: sortBy },
+                success: function(response) {
+                    // Update the products container with the sorted data received from the server
+                    $('.services-container').html(response);
+
+                    // Save the sorted results in sessionStorage and push into browsing history
+                    sessionStorage.setItem('searchResults', JSON.stringify(response));
+                    history.pushState({ searchResults: response }, document.title);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+        }
+
+        // Event delegation for the anchor tags inside the .services-container
+        $('.services-container').on('click', 'a.service-button, a.service-contact-button', function(event) {
+            // Prevent default anchor behavior
+            event.preventDefault();
+
+            // Get the href of the clicked anchor tag
+            var href = $(this).attr('href');
+
+            // Navigate to the href URL
+            window.location.href = href;
+        });
+    </script>
+{% endblock %}

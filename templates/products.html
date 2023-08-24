@@ -1,0 +1,137 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    GreenLink
+{% endblock %}
+
+{% block main %}
+    <section id="products">
+        <div class="search-box">
+            <div class="button-flex">
+                <p class="products-filter">Filter:</p>
+                <button type="button" class="btn btn-primary btn-block" style="margin-left: 1%; margin-right: 1%; background-color: rgb(69, 141, 82); border-color: rgb(69, 141, 82);" onclick="sortProducts('company_name')">sort by company</button>
+                <button type="button" class="btn btn-primary btn-block" style="margin-right: 2%; background-color: rgb(69, 141, 82); border-color: rgb(69, 141, 82);" onclick="sortProducts('product_name')">sort by product</button>
+            </div>            
+            <form id="search-form" class="search-form">
+                <input type="text" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px;" name="search" id="search-bar" placeholder="search for products" class="form-control">
+                <button type="button" class="btn btn-primary btn-block" style="border-top-left-radius: 0px; border-bottom-left-radius: 0px; background-color: rgb(69, 141, 82); border-color: rgb(69, 141, 82);" onclick="searchProducts()">Search</button>
+            </form>
+        </div>
+        <hr style="height: 2px; background-color: grey;">
+
+        <div class="products-container">             
+            <h1 style="margin-top: 2%; color: rgb(36, 97, 46);"><b></b></h1>
+            {% if products %}
+                {% for p in products %}
+                    <div class="product-template">
+                        <img class="product-images" src="{{p['image']}}" alt="products">
+                        <div class="product-info">
+                            <b class="products-b-1">{{p["company_name"]}}</b>
+                            <p class="products-p-1">{{p["product_name"]}}</p>
+                            <p class="products-rating">Rating: <b>{{p["rating"]}}</b></p>
+                            <div id="products-price">
+                                <p>$</p>
+                                <h3>{{p["price"]}}</h3>
+                            </div>
+                            <a class="product-button" href="{{p['link']}}">Buy Now</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+
+        // Function to handle form submission when the Enter key is pressed
+        function handleFormSubmission(event) {
+            event.preventDefault(); // Prevent the default form submission behavior
+            searchProducts(); // Call the searchProducts function for AJAX-based search
+        };
+
+        // Event listener to handle form submission when Enter key is pressed
+        document.getElementById('search-form').addEventListener('submit', handleFormSubmission);
+
+        function searchProducts() {
+            // Get the search query from the input field
+            var searchQuery = $('#search-bar').val();
+
+            // Perform an AJAX POST request to send the form data
+            $.ajax({
+                url: '/products',
+                type: 'POST',
+                data: { search: searchQuery },
+                success: function(data) {
+                    // Update the products container with the data received from the server
+                    $('.products-container').html(data);
+
+                    // Save the search results in sessionStorage
+                    sessionStorage.setItem('searchResults', JSON.stringify(data));
+
+                    // Push the current search results into the browsing history
+                    history.pushState({ searchResults: data }, document.title);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+        };
+
+        // Function to check if there are stored search results and display them on page load
+        function displayStoredResults() {
+            var storedResults = sessionStorage.getItem('productSearchResults');
+            if (storedResults) {
+                $('.products-container').html(JSON.parse(storedResults));
+            }
+        }
+
+        // Function to handle the back button click
+        window.onpopstate = function(event) {
+            if (event.state && event.state.searchResults) {
+                // If there are previous search results in the browsing history, display them
+                $('.products-container').html(event.state.searchResults);
+            } else {
+                // If no previous search results, load the default products using AJAX
+                displayStoredResults();
+            }
+        };
+
+        // Call the function to display stored results on page load
+        $(document).ready(function() {
+            displayStoredResults();
+        });
+
+        function sortProducts(sortBy) {
+            // Perform an AJAX POST request to send the sorting option to the server
+            $.ajax({
+                url: '/sort_products',
+                type: 'POST',
+                data: { sort_by: sortBy },
+                success: function(response) {
+                    // Update the products container with the sorted data received from the server
+                    $('.products-container').html(response);
+
+                    // Save the sorted results in sessionStorage and push into browsing history
+                    sessionStorage.setItem('searchResults', JSON.stringify(response));
+                    history.pushState({ searchResults: response }, document.title);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+        }
+
+        // Event delegation for the anchor tags inside the .products-container
+        $('.products-container').on('click', 'a.product-button', function(event) {
+            // Prevent default anchor behavior
+            event.preventDefault();
+
+            // Get the href of the clicked anchor tag
+            var href = $(this).attr('href');
+
+            // Navigate to the href URL
+            window.location.href = href;
+        });
+    </script>
+{% endblock %}

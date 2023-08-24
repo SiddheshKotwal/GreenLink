@@ -1,0 +1,15 @@
+<h1 style="margin-top: 2%; color: rgb(36, 97, 46);"><b>{{no_services}}</b></h1>
+{% for s in services %}
+    <div class="services-template">
+        <img class="service-images" src="{{s['image']}}" alt="products">
+        <div class="service-info">
+            <b class="services-b-1">{{s["company_name"]}}</b>
+            <p class="services-p-1">{{s["service"]}}</p>
+            <p class="ellipsis-services">{{s["service_desc"]}}</p>
+            <div class="serviceButtons">
+                <a class="service-contact-button" href="{{s['contact_link']}}">Contact Now</a>
+                <a class="service-button" href="{{s['website_link']}}">Visit Site</a>
+            </div>
+        </div>
+    </div>
+{% endfor %}
