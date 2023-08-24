@@ -247,13 +247,13 @@ document.addEventListener("DOMContentLoaded", function() {
             setTimeout(function() {
                 alertElement.style.display = 'none';
                 alertElement.innerHTML = '';
-            }, 10005000);
+            }, 5000);
         }
         else if(carbonFootprint){
             setTimeout(function(){
                 carbonFootprint.style.display = 'none';
                 carbonFootprint.innerHTML = '';
-            }, 15100000);
+            }, 15000);
         }
     }
 
