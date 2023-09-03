@@ -46,8 +46,8 @@ Discover the distinct capabilities of GreenLink:
 - **Carbon Footprint Calculator**: Assess your personal carbon emissions and join the journey towards a sustainable future.
 
 ## Demo
-Explore GreenLink through our [live demo](https://greenlink.onrender.com/).
-Video Demo: [video Link](https://youtu.be/2yqenfQCNuU)
+- **Explore GreenLink** through our [live demo](https://greenlink.onrender.com/).
+- **Video Demo**: [video Link](https://youtu.be/2yqenfQCNuU)
 
 ## License
 This project is licensed under the MIT License. You're welcome to use and modify it as per the license terms.
