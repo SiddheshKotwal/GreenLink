@@ -56,5 +56,4 @@ This project is licensed under the MIT License. You're welcome to use and modify
 For questions or feedback, feel free to reach out:
 
 - LinkedIn: [Siddhesh Kotwal](https://www.linkedin.com/in/siddhesh-kotwal-6386b8265).
-- Discord: siddheshkotwal
 - Email: siddheshkotwal379@gmail.com
