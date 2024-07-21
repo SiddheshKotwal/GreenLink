@@ -47,7 +47,6 @@ Discover the distinct capabilities of GreenLink:
 
 ## Demo
 - **Explore GreenLink** through our [live demo](https://greenlink.onrender.com/).
-- **Video Demo**: [video Link](https://youtu.be/2yqenfQCNuU)
 
 ## License
 This project is licensed under the MIT License. You're welcome to use and modify it as per the license terms.
