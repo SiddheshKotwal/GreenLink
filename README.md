@@ -35,7 +35,6 @@ GreenLink is built using the following technologies:
 * Flask
 * HTML, CSS, JavaScript
 * SQLite
-* JQuery
 
 ## Features
 Discover the distinct capabilities of GreenLink:
